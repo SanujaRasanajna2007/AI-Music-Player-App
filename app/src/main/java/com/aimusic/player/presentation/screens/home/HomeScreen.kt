@@ -8,6 +8,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -51,7 +52,7 @@ fun HomeScreen(navController: NavController) {
                     modifier = Modifier.padding(vertical = 8.dp)
                 )
             }
-            
+
             // Recently Played Card
             item {
                 QuickAccessCard(
@@ -60,7 +61,7 @@ fun HomeScreen(navController: NavController) {
                     onClick = { /* Navigate to recently played */ }
                 )
             }
-            
+
             // Most Played Card
             item {
                 QuickAccessCard(
@@ -69,7 +70,7 @@ fun HomeScreen(navController: NavController) {
                     onClick = { /* Navigate to most played */ }
                 )
             }
-            
+
             // Favorites Card
             item {
                 QuickAccessCard(
@@ -78,7 +79,7 @@ fun HomeScreen(navController: NavController) {
                     onClick = { /* Navigate to favorites */ }
                 )
             }
-            
+
             // AI Features Section
             item {
                 Spacer(modifier = Modifier.height(8.dp))
@@ -89,7 +90,7 @@ fun HomeScreen(navController: NavController) {
                     modifier = Modifier.padding(vertical = 8.dp)
                 )
             }
-            
+
             // Lyrics Generation Card
             item {
                 FeatureCard(
