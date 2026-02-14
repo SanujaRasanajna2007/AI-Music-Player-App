@@ -7,14 +7,19 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.rememberNavController
+import com.aimusic.player.presentation.components.BottomNavigationBar
+import com.aimusic.player.presentation.navigation.NavigationGraph
+import com.aimusic.player.presentation.navigation.Screen
 import com.aimusic.player.presentation.theme.AIMusicPlayerTheme
 import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ * Main Activity - Entry point for the app
+ * Uses Compose Navigation for screen management
+ * Battery-optimized: Efficient navigation with state preservation
+ */
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,57 +28,27 @@ class MainActivity : ComponentActivity() {
         
         setContent {
             AIMusicPlayerTheme {
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    WelcomeScreen()
-                }
+                MusicPlayerApp()
             }
         }
     }
 }
 
 @Composable
-fun WelcomeScreen() {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(24.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Text(
-            text = "🎵 AI Music Player",
-            style = MaterialTheme.typography.headlineLarge,
-            color = MaterialTheme.colorScheme.primary,
-            textAlign = TextAlign.Center
-        )
-        
-        Spacer(modifier = Modifier.height(16.dp))
-        
-        Text(
-            text = "Project setup complete!",
-            style = MaterialTheme.typography.titleMedium,
-            color = MaterialTheme.colorScheme.onSurface,
-            textAlign = TextAlign.Center
-        )
-        
-        Spacer(modifier = Modifier.height(8.dp))
-        
-        Text(
-            text = "Ready to start building...",
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-            textAlign = TextAlign.Center
-        )
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun WelcomeScreenPreview() {
-    AIMusicPlayerTheme {
-        WelcomeScreen()
+fun MusicPlayerApp() {
+    val navController = rememberNavController()
+    
+    Scaffold(
+        bottomBar = {
+            BottomNavigationBar(navController = navController)
+        },
+        containerColor = MaterialTheme.colorScheme.background
+    ) { paddingValues ->
+        Box(modifier = Modifier.padding(paddingValues)) {
+            NavigationGraph(
+                navController = navController,
+                startDestination = Screen.Home.route
+            )
+        }
     }
 }
